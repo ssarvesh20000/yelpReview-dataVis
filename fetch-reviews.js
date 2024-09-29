@@ -2,7 +2,7 @@ const axios = require('axios');
 const { MongoClient } = require('mongodb');
 
 // SerpAPI key and MongoDB connection string
-const SERP_API_KEY = 'de65dd2835925cf6b83f0c60fa0e65c92d7d4621b1ae1a39df5e14a0608d69fa';  // Replace with your actual SerpAPI API key
+const SERP_API_KEY = 'de65dd2835925cf6b83f0c60fa0e65c92d7d4621b1ae1a39df5e14a0608d69fa';  
 const MONGODB_URI = 'mongodb+srv://ssarvesh20000:DYL0X8ncmkcW30Na@cluster0.rbw81.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 // Function to fetch Yelp business place_id using SerpAPI
