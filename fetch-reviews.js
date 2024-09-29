@@ -85,7 +85,7 @@ async function storeReviewsInMongoDB(reviews, businessName, location) {
 
       const reviewDocument = {
         business_name: businessName,
-        review_text: review.text || review.snippet || 'No review text available',  // Adjust based on the actual field name
+        review_text: review.comment.text || review.snippet || 'No review text available',  // Adjust based on the actual field name
         rating: review.rating || 'No rating available',
         user_name: review.user && review.user.name ? review.user.name : 'Anonymous',
         date: review.date || review.time_created || 'No date available',  // Adjust based on the actual field name
@@ -98,6 +98,7 @@ async function storeReviewsInMongoDB(reviews, businessName, location) {
 
       try {
         await collection.insertOne(reviewDocument);
+        console.log('Inserted successfully:', JSON.stringify(reviewDocument, null, 2));
       } catch (insertError) {
         console.error('Error inserting document into MongoDB:', insertError);
       }
