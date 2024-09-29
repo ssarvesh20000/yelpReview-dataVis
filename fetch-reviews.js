@@ -2,7 +2,7 @@ const axios = require('axios');
 const { MongoClient } = require('mongodb');
 
 // SerpAPI key and MongoDB connection string
-const SERP_API_KEY = 'de65dd2835925cf6b83f0c60fa0e65c92d7d4621b1ae1a39df5e14a0608d69fa';  
+const SERP_API_KEY = 'de65dd2835925cf6b83f0c60fa0e65c92d7d4621b1ae1a39df5e14a0608d69fa';  // Replace with your actual SerpAPI API key
 const MONGODB_URI = 'mongodb+srv://ssarvesh20000:DYL0X8ncmkcW30Na@cluster0.rbw81.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 // Function to fetch Yelp business place_id using SerpAPI
@@ -85,7 +85,7 @@ async function storeReviewsInMongoDB(reviews, businessName, location) {
 
       const reviewDocument = {
         business_name: businessName,
-        review_text: review.text || review.snippet || 'No review text available',  // Adjust based on the actual field name
+        review_text: review.comment.text || review.snippet || 'No review text available',  // Adjust based on the actual field name
         rating: review.rating || 'No rating available',
         user_name: review.user && review.user.name ? review.user.name : 'Anonymous',
         date: review.date || review.time_created || 'No date available',  // Adjust based on the actual field name
@@ -98,6 +98,7 @@ async function storeReviewsInMongoDB(reviews, businessName, location) {
 
       try {
         await collection.insertOne(reviewDocument);
+        console.log('Inserted successfully:', JSON.stringify(reviewDocument, null, 2));
       } catch (insertError) {
         console.error('Error inserting document into MongoDB:', insertError);
       }
